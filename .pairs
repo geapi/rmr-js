@@ -1,0 +1,12 @@
+pairs:
+  ga: Georg Apitz; georg
+  zc: Zac Clark; zclark
+
+email:
+  prefix: pair
+  domain: pivotallabs.com
+
+email_addresses:
+  ga: georg@usebar.org
+
+global: true
