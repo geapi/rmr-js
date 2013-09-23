@@ -43,7 +43,7 @@ describe("Store", function () {
       var obj = {foo: "bar"};
       store.save(obj, callbackSpy);
 
-      expect(callbackSpy).toHaveBeenCalled();
+      expect(callbackSpy).toHaveBeenCalledWith([{foo: "bar", id: jasmine.any(Number)}]);
     });
   });
 
@@ -108,5 +108,26 @@ describe("Store", function () {
         store.find();
       }).not.toThrow();
     });
+  });
+
+  describe("remove", function () {
+    it("removes and item from the store", function () {
+      var id;
+      store.save({a: "A"}, function (items) {
+        id = items[0].id;
+      });
+      store.save({b: "B"}, noop);
+
+      store.findAll(callbackSpy);
+      var callbackData = callbackSpy.mostRecentCall.args[0];
+
+      expect(callbackData.length).toEqual(2);
+
+      store.remove(id, noop);
+      store.findAll(callbackSpy);
+      callbackData = callbackSpy.mostRecentCall.args[0];
+      expect(callbackData.length).toEqual(1);
+    });
+
   });
 });
