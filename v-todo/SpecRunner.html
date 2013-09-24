@@ -41,6 +41,7 @@
         <button id="clear-completed">Clear completed</button>
     </footer>
 </section>
+<div id="jasmine_content"></div>
 
 <!-- include source files here... -->
 <script src="bower_components/todomvc-common/base.js"></script>
@@ -60,9 +61,14 @@
 <script type="text/javascript" src="spec/storeSpec.js"></script>
 <script type="text/javascript" src="spec/viewSpec.js"></script>
 <script type="text/javascript" src="spec/modelSpec.js"></script>
+<script type="text/javascript" src="spec/controllerSpec.js"></script>
 
 <script type="text/javascript">
     (function () {
+        afterEach(function () {
+           document.getElementById("jasmine_content").innerHTML = "";
+        });
+
         var jasmineEnv = jasmine.getEnv();
         jasmineEnv.updateInterval = 1000;
 
