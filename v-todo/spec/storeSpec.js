@@ -13,7 +13,7 @@ describe("Store", function () {
 
   describe("constructor", function(){
     it("calls the callback with the local store name", function () {
-      var testStore = new app.Store("test store", callbackSpy);
+      new app.Store("test store", callbackSpy);
 
       expect(callbackSpy).toHaveBeenCalledWith({ todos : [ ] });
     });
@@ -44,6 +44,22 @@ describe("Store", function () {
       store.save(obj, callbackSpy);
 
       expect(callbackSpy).toHaveBeenCalledWith([{foo: "bar", id: jasmine.any(Number)}]);
+    });
+
+    it("can modify objects in place", function () {
+      var id;
+      store.save({foo: "bar"}, function (items) {
+        id = items[0].id;
+      });
+
+      store.save(id, {foo: "stuff"});
+
+      store.findAll(callbackSpy);
+
+      expect(callbackSpy).toHaveBeenCalled();
+      var callbackData = callbackSpy.mostRecentCall.args[0];
+      expect(callbackData.length).toEqual(1);
+      expect(callbackData[0]).toEqual({foo: "stuff", id: id});
     });
   });
 
