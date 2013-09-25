@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
-gem "jasmine"
+gem "jasmine", github: "pivotal/jasmine-gem", ref: "e8105401b6ed9d4b462bbbaf508ab7ac8a77a245"
 
 
 # Use SCSS for stylesheets
