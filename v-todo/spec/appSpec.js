@@ -20,10 +20,11 @@ describe("app", function () {
 
     beforeEach(function () {
       createItem = function (name) {
-        document.getElementById("new-todo").value = name;
+        var $newTodoInput = jQuery("#new-todo");
+        $newTodoInput.val(name);
         var e = new Event("keypress");
         e.keyCode = 13;
-        document.getElementById("new-todo").dispatchEvent(e);
+        $newTodoInput[0].dispatchEvent(e);
       };
     });
 
@@ -35,24 +36,30 @@ describe("app", function () {
     it("enables the adding of todo items", function () {
       createItem("Make an acceptance test");
 
-      expect(document.getElementById("todo-count").innerText).toEqual("1 item left");
+      expect(jQuery("#todo-count").text()).toEqual("1 item left");
     });
 
     it("allows deletion of todo items", function () {
       createItem("delete me");
       createItem("keep me");
 
-      var lis = document.getElementsByTagName("li");
-      var todoList;
-      for (var i in lis) {
-        if (lis[i].innerText == "delete me") {
-          todoList = lis[i];
-        }
-      }
+      expect(jQuery("#todo-count").text()).toEqual("2 items left");
 
-      todoList.dispatchEvent({type: "click", target: todoList});
+      jQuery("li:contains('delete me') .destroy").trigger("click");
 
-      expect(document.getElementById("todo-count").innerText).toEqual("1 item left");
+      expect(jQuery("#todo-count").text()).toEqual("1 item left");
+    });
+
+    it("allows the completion of todo items", function () {
+      createItem("complete me");
+
+      expect(jQuery("li:contains('complete me')").hasClass("completed")).toEqual(false);
+      expect(jQuery("#todo-count").text()).toEqual("1 item left");
+
+      jQuery("li:contains('complete me') .toggle").trigger("click");
+
+      expect(jQuery("li:contains('complete me')").hasClass("completed")).toEqual(true);
+      expect(jQuery("#todo-count").text()).toEqual("0 items left");
     });
   });
 });
