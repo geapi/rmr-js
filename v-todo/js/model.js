@@ -100,7 +100,7 @@
 		};
 
 		this.storage.findAll(function (data) {
-			data.each(function (todo) {
+			data.forEach(function (todo) {
 				if (todo.completed === 1) {
 					todos.completed++;
 				} else {

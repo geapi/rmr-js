@@ -311,7 +311,8 @@
 
 		// Remove all other selected states. We loop through all of them in case the
 		// UI gets in a funky state with two selected.
-		$('#filters .selected').each(function (item) {
+		var arrayOfNodes = Array.prototype.slice.call($('#filters .selected'));
+		arrayOfNodes.forEach(function (item) {
 			item.className = '';
 		});
 
