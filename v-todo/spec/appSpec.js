@@ -50,7 +50,7 @@ describe("app", function () {
       expect(jQuery("#todo-count").text()).toEqual("1 item left");
     });
 
-    it("allows the completion of todo items", function () {
+    it("allows the completion and un-completion of todo items", function () {
       createItem("complete me");
 
       expect(jQuery("li:contains('complete me')").hasClass("completed")).toEqual(false);
@@ -60,6 +60,26 @@ describe("app", function () {
 
       expect(jQuery("li:contains('complete me')").hasClass("completed")).toEqual(true);
       expect(jQuery("#todo-count").text()).toEqual("0 items left");
+
+      jQuery("li:contains('complete me') .toggle").trigger("click");
+
+      expect(jQuery("li:contains('complete me')").hasClass("completed")).toEqual(false);
+      expect(jQuery("#todo-count").text()).toEqual("1 item left");
+    });
+
+    it("sets all items to active when ALL of them are completed", function () {
+      createItem("complete me");
+      createItem("leave me");
+      createItem("another to ignore");
+      createItem("have this one completed too");
+
+      jQuery("#toggle-all").trigger("click");
+      jQuery("#toggle-all").trigger("click");
+
+      expect(jQuery("li:contains('complete me')").hasClass("completed")).toEqual(false);
+      expect(jQuery("li:contains('have this one completed too')").hasClass("completed")).toEqual(false);
+      expect(jQuery("li:contains('leave me')").hasClass("completed")).toEqual(false);
+      expect(jQuery("li:contains('another to ignore')").hasClass("completed")).toEqual(false);
     });
   });
 });
