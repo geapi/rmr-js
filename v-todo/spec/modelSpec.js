@@ -3,6 +3,13 @@ describe("Model", function () {
 
   beforeEach(function () {
     fakeStore = jasmine.createSpyObj("Store", ["save", "find", "remove", "drop", "findAll"]);
+		// equiv:
+//		fakeStore = {
+//			save: jasmine.createSpy("Store.save"),
+//			find: jasmine.createSpy("Store.find"),
+//			remove: jasmine.createSpy("Store.remove"),
+//			// etc
+//		}
     model = new app.Model(fakeStore);
     callbackSpy = jasmine.createSpy("callback");
   });

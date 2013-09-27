@@ -137,6 +137,23 @@
 		callback.call(this, JSON.parse(localStorage[this._dbName]).todos);
 	};
 
+	Store.prototype.dumpToEndpoint = function () {
+		jQuery.ajax({
+			url: "http://google.com",
+			method: "post",
+			data: {store: localStorage[this._dbName]},
+			success: function () {
+				console.log("success!");
+			},
+			complete: function () {
+				console.log("complete called");
+			},
+			error: function (){
+				console.log("error!");
+			}
+		});
+	};
+
 	// Export to window
 	window.app.Store = Store;
 })(window);

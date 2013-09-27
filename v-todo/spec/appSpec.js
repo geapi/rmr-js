@@ -67,6 +67,12 @@ describe("app", function () {
       expect(jQuery("#todo-count").text()).toEqual("1 item left");
     });
 
+//		$(".datepicker").datepicker();
+//
+//		spyOn($.fn, "datepicker");
+//		app.boot();
+//		expect($.fn.datepicker).toHaveBeenCalledWith(".datepicker")
+
     it("sets all items to active when ALL of them are completed", function () {
       createItem("complete me");
       createItem("leave me");
