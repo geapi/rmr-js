@@ -29,7 +29,7 @@ Teaspoon.setup do |config|
     # these files are serve-able from sprockets.
     #
     # Note: Can also be set to nil.
-    suite.matcher = "{spec/javascripts,app/assets}/**/*_spec.{js,js.coffee,coffee}"
+    suite.matcher = "{spec/javascripts,app/assets}/**/*Spec.{js,js.coffee,coffee}"
 
     # Each suite can load a different helper, which can in turn require additional files. This file is loaded before
     # your specs are loaded, and can be used as a manifest.
